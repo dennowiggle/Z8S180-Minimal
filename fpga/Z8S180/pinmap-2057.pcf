@@ -1,0 +1,155 @@
+# Clocking and Reset
+
+set_io -pullup no   clock_25_in      52 #   IOB_82      Y1.3         - 25MHz input clock.
+set_io -pullup yes  fpga_reset_n    102 #   IOR_161     J1.36   S1.1 - Hard Reset to FPGA.  
+
+set_io -pullup no   clock_cpu_out    39 #   IOB_61      J2.14
+set_io -pullup no   cpu_reset_n      28 #   IOL_23A     J2.22   
+
+# CPU Control Signals
+
+set_io -pullup yes  cpu_nmi_n        25 #   IOL_18A     J2.24 
+set_io -pullup yes  cpu_busreq_n     31 #   IOL_24A     J2.20 
+set_io -pullup yes  cpu_busack_n     33 #   IOL_25A     J2.18  
+set_io -pullup yes  cpu_wait_n       37 #   IOB_56      J2.16 
+set_io -pullup yes  cpu_clk_phi      42 #   IOB_64      J2.12
+set_io -pullup yes  cpu_rd_n         44 #   IOB_72      J2.10  
+set_io -pullup yes  cpu_wr_n         47 #   IOB_79      J2.8 
+set_io -pullup yes  cpu_m1_n         55 #   IOB_91      J2.5 
+
+set_io -pullup yes  cpu_dreq1_n      49 #   IOB_81      J2.6
+set_io -pullup yes  cpu_tend1_n      48 #   IOB_80      J2.7    
+set_io -pullup yes  cpu_halt_n       45 #   IOB_73      J2.9  
+set_io -pullup yes  cpu_refresh_n    43 #   IOB_71      J2.11  
+set_io -pullup yes  cpu_iorq_n       41 #   IOB_63      J2.13 
+set_io -pullup yes  cpu_mreq_n       38 #   IOB_57      J2.15  
+set_io -pullup yes  cpu_e            34 #   IOL_25B     J2.17 
+set_io -pullup yes  cpu_st           32 #   IOL_24B     J2.19 
+set_io -pullup yes  cpu_int2_n       29 #   IOL_23B     J2.21 
+set_io -pullup yes  cpu_int1_n       26 #   IOL_18B     J2.23 
+set_io -pullup yes  cpu_int0_n       24 #   IOL_17B     J2.25  
+
+# Memory Control Signals
+
+set_io -pullup no   mem_ce_n         11 #   IOL_8A      J2.36 
+set_io -pullup no   mem_we_n        143 #   IOT_221     J2.46  
+set_io -pullup no   mem_oe_n         12 #   IOL_8B      J2.35
+
+# CPU Address Bus
+
+set_io -pullup yes  cpu_address[0]   23 #   IOL_17A     J2.26  
+set_io -pullup yes  cpu_address[1]   21 #   IOL_14A     J2.28  
+set_io -pullup yes  cpu_address[2]   19 #   IOL_13A     J2.30   
+set_io -pullup yes  cpu_address[3]   17 #   IOL_12A     J2.32     
+set_io -pullup yes  cpu_address[4]   15 #   IOL_10A     J2.34 
+set_io -pullup yes  cpu_address[5]  141 #   IOT_219     J2.48
+set_io -pullup yes  cpu_address[6]  138 #   IOT_216     J2.50  
+set_io -pullup yes  cpu_address[7]  136 #   IOT_214     J2.52
+set_io -pullup yes  cpu_address[8]  134 #   IOT_212     J2.54
+set_io -pullup yes  cpu_address[9]  129 #   IOT_198     J2.56 
+set_io -pullup yes  cpu_address[10] 135 #   IOT_213     J2.53 
+set_io -pullup yes  cpu_address[11] 137 #   IOT_215     J2.51  
+set_io -pullup yes  cpu_address[12] 139 #   IOT_217     J2.49 
+set_io -pullup yes  cpu_address[13] 142 #   IOT_220     J2.47 
+set_io -pullup yes  cpu_address[14] 144 #   IOT_222     J2.45  
+set_io -pullup yes  cpu_address[15]  16 #   IOL_10B     J2.33 
+set_io -pullup yes  cpu_address[16]  18 #   IOL_12B     J2.31 
+set_io -pullup yes  cpu_address[17]  20 #   IOL_14B     J2.29   
+set_io -pullup yes  cpu_address[18]  22 #   IOL_14B     J2.27  
+set_io -pullup yes  cpu_address[19] 130 #   IOT_206     J2.55 
+
+# CPU Data Bus
+
+set_io              cpu_data[0]       9 #   IOL_5A      J2.38   pullup in code
+set_io              cpu_data[1]       7 #   IOL_4A      J2.40   pullup in code
+set_io              cpu_data[2]       3 #   IOL_3A      J2.42   pullup in code
+set_io              cpu_data[3]       1 #   IOL_2A      J2.44   pullup in code
+set_io              cpu_data[4]       2 #   IOL_2B      J2.43   pullup in code
+set_io              cpu_data[5]       4 #   IOL_3B      J2.41   pullup in code
+set_io              cpu_data[6]       8 #   IOL_4B      J2.39   pullup in code
+set_io              cpu_data[7]      10 #   IOL_5B      J2.37   pullup in code
+
+# SD card
+
+set_io -pullup yes  sd_cs_n         117 #   IOT_174     J1.49   J8.2  
+set_io -pullup yes  sd_clk          124 #   IOT_191     J1.55   J8.5 
+set_io -pullup yes  sd_mosi         119 #   IOT_178     J1.51   J8.3 
+set_io -pullup yes  sd_miso         121 #   IOT_181     J1.53   J8.7 
+set_io -pullup yes  sd_det_n        125 #   IOT_192     J1.54   J8.10   
+
+# Video generation
+
+set_io  -nowarn -pullup no   rgb_hsync        83 #   IOR_119     J1.22           
+set_io  -nowarn -pullup no   rgb_vsync        85 #   IOR_128     J1.24           
+set_io  -nowarn -pullup no   rgb_red[0]       75 #   IOR_111     J1.13           
+set_io  -nowarn -pullup no   rgb_red[1]       78 #   IOR_114     J1.15           
+set_io  -nowarn -pullup no   rgb_red[2]       80 #   IOR_116     J1.17           
+set_io  -nowarn -pullup no   rgb_red[3]       82 #   IOR_118     J1.19           
+set_io  -nowarn -pullup no   rgb_blue[0]      74 #   IOR_110     J1.14           
+set_io  -nowarn -pullup no   rgb_blue[1]      76 #   IOR_112     J1.16           
+set_io  -nowarn -pullup no   rgb_blue[2]      79 #   IOR_115     J1.18           
+set_io  -nowarn -pullup no   rgb_blue[3]      81 #   IOR_117     J1.20   
+set_io  -nowarn -pullup no   rgb_green[0]     84 #   IOR_120     J1.21           
+set_io  -nowarn -pullup no   rgb_green[1]     87 #   IOR_136     J1.23           
+set_io  -nowarn -pullup no   rgb_green[2]     90 #   IOR_138     J1.25 
+set_io  -nowarn -pullup no   rgb_green[3]     93 #   IOR_140     J1.27  
+
+# SNES Controller
+
+set_io -pullup no   snes_clock       56 #   IOB_94      J1.5
+set_io -pullup no   snes_latch       61 #   IOB_96      J1.7
+set_io -pullup yes  snes_data0       60 #   IOB_95      J1.8
+set_io -pullup yes  snes_data1       63 #   IOB_103     J1.9
+
+# UART
+
+set_io -pullup no   uart0_tx         62 #   IOB_102     J1.10
+set_io -pullup yes  uart0_rx         64 #   IOB_104     J1.12
+set_io -pullup no   uart1_tx         88 #   IOR_137     J1.26           
+set_io -pullup yes  uart1_rx         91 #   IOR_138     J1.25 
+
+# SPI
+
+set_io  -pullup yes  spi_clk         70 #   IOB_107_SCK J6.10   R15.1   U4.2    
+set_io  -pullup yes  spi_cs          71 #   IOB_108_SS  D11.2   D12.2   R5.1    U4.4
+set_io  -pullup yes  spi_mosi        67 #   IOB_105_SDO J6.7    U4.1        
+set_io  -pullup yes  spi_miso        68 #   IOB_106_SDI J6.6    U4.8        
+
+
+# Pins below can be reassigned for add-on cards / features
+
+set_io -pullup no   led[0]          118 #   IOT_177     J1.48   D3.1        
+set_io -pullup no   led[1]          116 #   IOT_173     J1.46   D4.1    
+set_io -pullup no   led[2]          115 #   IOT_172     J1.45   D5.1        
+set_io -pullup no   led[3]          114 #   IOT_171     J1.44   D6.1        
+set_io -pullup no   led[4]          113 #   IOT_170     J1.43   D7.1        
+set_io -pullup no   led[5]          112 #   IOT_169     J1.42   D8.1        
+set_io -pullup no   led[6]          110 #   IOT_168     J1.41   D9.1        
+set_io -pullup no   led[7]          107 #   IOR_167     J1.40   D10.1       
+
+set_io -pullup no   debug_port[0]   106 #   IOR_166     J1.39 
+set_io -pullup no   debug_port[1]   105 #   IOR_165     J1.38   S2.1        
+set_io -pullup no   debug_port[2]   104 #   IOR_164     J1.37   
+set_io -pullup no   debug_port[3]    98 #   IOR_148     J1.34           
+set_io -pullup no   debug_port[4]    96 #   IOR_146     J1.32           
+set_io -pullup no   debug_port[5]    94 #   IOR_141     J1.30           
+set_io -pullup no   debug_port[6]    95 #   IOR_144     J1.29 
+set_io -pullup no   debug_port[7]    73 #   IOR_109     J1.11  
+
+set_io -pullup no   debug_test[0]    97 #   IOR_147     J1.31 
+set_io -pullup no   debug_test[1]    99 #   IOR_152     J1.33
+set_io -pullup no   debug_test[2]   101 #   IOR_160     J1.35     
+
+
+# Unused Pins
+                    
+set_io  -nowarn     IOB_63           41 #   IOB_63      J2.13           
+set_io  -nowarn     IOT_179         120 #   IOT_179     J1.50           
+set_io  -nowarn     IOT_190         122 #   IOT_190     J1.52           
+set_io  -nowarn     IOT_197         128 #   IOT_197     J1.56           
+
+# Unable to Use 
+
+# set_io  -nowarn     CDONE            65 #   CDONE       J6.2    R3.2        
+# set_io  -nowarn     CRESET_N         66 #   CRESETB     J6.4    R4.1        
+

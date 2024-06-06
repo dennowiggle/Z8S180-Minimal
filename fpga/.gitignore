@@ -1,0 +1,7 @@
+*.asc
+top.bin
+*.json
+*.rpt
+*.vcd
+*.vvp
+Make.local
