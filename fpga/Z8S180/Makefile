@@ -38,7 +38,7 @@ counter_tb.vvp: counter_tb.v counter.v
 plot: counter_tb.vcd
 	gtkwave $^
 
-prog: top.bin
+prog: flash.bin
 	$(FLASH_PROG) $^
 
 # extra dependancies
