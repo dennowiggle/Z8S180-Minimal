@@ -2,7 +2,7 @@
 // * 
 // *    Code by Denno Wiggle aka WTM.
 // *
-// *    Copyright (C) 2023 Denno Wiggle
+// *    Copyright (C) 2023, 2024 Denno Wiggle
 // *
 // *    Z80 Bus Interface Module
 // *    -- Copies the ROM from SPI FLASH to SRAM memory.
@@ -360,6 +360,7 @@ module wtm_busInterface #(
     assign rom_req = ~(boot_ce_n && boot_we_n || rom_load_done);
 
     // Process to control the CPU data bus output signal based on the internal request signals. 
+    // Define the memory control signals for access to the external SRAM memory.
     always @(*)
     begin
         // Default values
@@ -372,20 +373,23 @@ module wtm_busInterface #(
             begin
                 cpu_data_out <= boot_data;
                 cpu_data_oe  <= 1'b1;
+                mem_ce_n     <= boot_ce_n;
+                mem_we_n     <= boot_we_n;
+                mem_oe_n     <= 1'b1;
             end
         // Catch all other cases
         default : 
             begin
                 cpu_data_out <= fpga_data_out;
                 cpu_data_oe  <= fpga_cs_r;
+                // Terms for mem_xx_n can be simplified but including all these helps when debugging mem_xx_n signals with a scope).
+                // This might be helpful for some CPU types (e.g. ez80 which has tighter timing).
+                mem_ce_n     <= cpu_mreq_n || (cpu_wr_n && cpu_rd_n);
+                mem_we_n     <= cpu_mreq_n || cpu_wr_n;
+                mem_oe_n     <= cpu_mreq_n || cpu_rd_n;
             end
         endcase
     end 
-
-    // Define the memory control signals for access to the external SRAM memory.
-    assign mem_we_n = rom_load_done ? cpu_wr_n : boot_we_n;
-    assign mem_oe_n = cpu_rd_n;
-    assign mem_ce_n = rom_load_done ? (cpu_wr_n && cpu_rd_n) : boot_ce_n;
 
     // 8 bit debug port for board bringup and test.
     assign debug_port = {1'b0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0};

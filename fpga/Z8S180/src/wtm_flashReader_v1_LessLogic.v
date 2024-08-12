@@ -46,7 +46,7 @@ module wtm_flashReader #(
 
     // SPI signals
     output wire         spi_clk,
-    output reg          spi_cs,
+    output reg          spi_cs_n,
     output reg          spi_mosi,
     input  wire         spi_miso,
 
@@ -93,7 +93,7 @@ module wtm_flashReader #(
 
     // Flash read state machine
     reg [2:0] flash_read_state;
-    parameter [2:0]
+    localparam [2:0]
         FLASH_IDLE          = 0,
         FLASH_WAKE_UP       = 1,
         FLASH_WAIT          = 2,
@@ -266,7 +266,7 @@ module wtm_flashReader #(
 
         if (reset_n == 1'b0)
         begin
-            spi_cs                      <= 1'b1;
+            spi_cs_n                    <= 1'b1;
             flash_address               <= START_ADDRESS;
             flash_read_active           <= 1'b0;
             flash_wait_timer            <= 1'b0;
@@ -284,7 +284,7 @@ module wtm_flashReader #(
             begin
                 if (flash_read_en == 1'b1)
                 begin
-                    spi_cs              <= 1'b1;
+                    spi_cs_n            <= 1'b1;
                     command_count       <= 0;
                     flash_read_active   <= 1'b0;
                     flash_wait_timer    <= 1'b0;
@@ -296,7 +296,7 @@ module wtm_flashReader #(
             begin   
                 if (spi_state == SPI_IDLE && spi_tx_tValid == 1'b0 )
                 begin   
-                    spi_cs              <= 1'b0;
+                    spi_cs_n            <= 1'b0;
                     spi_tx_tValid       <= 1'b1;
                     flash_read_state    <= FLASH_WAIT;
                 end
@@ -306,13 +306,13 @@ module wtm_flashReader #(
             begin
                 if (spi_state == SPI_IDLE && spi_tx_tValid == 1'b0 && flash_wait_timer == 1'b0)
                 begin
-                    spi_cs              <= 1'b1;
+                    spi_cs_n            <= 1'b1;
                     flash_wait_timer    <= 1'b1;
                 end
 
                 if (flash_wait_complete == 1'b1)
                 begin
-                    spi_cs              <= 1'b0;
+                    spi_cs_n            <= 1'b0;
                     flash_wait_timer    <= 1'b0;
                     flash_read_state    <= FLASH_READ_CMD;
                 end
@@ -350,7 +350,7 @@ module wtm_flashReader #(
 
             FLASH_STOP : // Stay here until the read enable signal is lowered.
             begin
-                spi_cs                      <= 1'b1;
+                spi_cs_n                    <= 1'b1;
 
                 if (flash_read_en == 1'b0)
                     flash_read_state        <= FLASH_IDLE;

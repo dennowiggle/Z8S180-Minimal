@@ -4,7 +4,7 @@
 // *    board connected to 2067-Z8S180 CPU board. Both boards designed by
 // *    John Winans.
 // *
-// *    Copyright (C) 2023 Denno Wiggle
+// *    Copyright (C) 2023, 2024 Denno Wiggle
 // *
 // *    -- Controls CPU inputs based on CPU outputs.
 // *    -- Provides clock and reset to the CPU.
@@ -124,17 +124,11 @@ module top #(
     output wire         mem_we_n,
     output wire         mem_oe_n,
 
-    // SNES Controller signals
-    output wire         snes_clock,
-    output wire         snes_latch,
-    input  wire         snes_data1,
-    input  wire         snes_data0,
-
     // UART Signals
-    output wire         uart0_tx,
-    input  wire         uart0_rx,
     output wire         uart1_tx,
     input  wire         uart1_rx,
+    output wire         uart2_tx,
+    input  wire         uart2_rx,
 
     // SD Card signals
     output wire         sd_cs_n,
@@ -145,7 +139,7 @@ module top #(
 
     // SPI signals attached to FPHA and configuration FLASH
     output wire         spi_clk,
-    output wire         spi_cs,
+    output wire         spi_cs_n,
     output wire         spi_mosi,
     input  wire         spi_miso,
 
@@ -242,12 +236,12 @@ module top #(
 
     // Assign debug pin to debug top level verilog internal signals
     assign debug_test[0] = rom_load_done;
-    assign debug_test[1] = spi_cs;
+    assign debug_test[1] = spi_cs_n;
     assign debug_test[2] = reset_cpu_n;
 
     // The uart 0 and 1 ports are not currently used
-    assign uart0_tx = 1'b1;
     assign uart1_tx = 1'b1;
+    assign uart2_tx = 1'b1;
 
 
     // PLL input frequency  = 25MHz
@@ -439,7 +433,7 @@ module top #(
 
         // SPI signals
         .spi_clk                (spi_clk),
-        .spi_cs                 (spi_cs),
+        .spi_cs_n               (spi_cs_n),
         .spi_mosi               (spi_mosi),
         .spi_miso               (spi_miso)
     );

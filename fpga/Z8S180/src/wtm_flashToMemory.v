@@ -60,7 +60,7 @@ module wtm_flashToMemory #(
 
     // SPI signals
     output wire         spi_clk,
-    output wire         spi_cs,
+    output wire         spi_cs_n,
     output wire         spi_mosi,
     input  wire         spi_miso
 
@@ -127,7 +127,7 @@ module wtm_flashToMemory #(
 
         // SPI signals
         .spi_clk            (spi_clk),
-        .spi_cs             (spi_cs),
+        .spi_cs_n           (spi_cs_n),
         .spi_mosi           (spi_mosi),
         .spi_miso           (spi_miso),
 

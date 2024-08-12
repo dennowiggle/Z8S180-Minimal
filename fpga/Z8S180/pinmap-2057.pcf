@@ -77,41 +77,17 @@ set_io -pullup yes  sd_mosi         119 #   IOT_178     J1.51   J8.3
 set_io -pullup yes  sd_miso         121 #   IOT_181     J1.53   J8.7 
 set_io -pullup yes  sd_det_n        125 #   IOT_192     J1.54   J8.10   
 
-# Video generation
-
-set_io  -nowarn -pullup no   rgb_hsync        83 #   IOR_119     J1.22           
-set_io  -nowarn -pullup no   rgb_vsync        85 #   IOR_128     J1.24           
-set_io  -nowarn -pullup no   rgb_red[0]       75 #   IOR_111     J1.13           
-set_io  -nowarn -pullup no   rgb_red[1]       78 #   IOR_114     J1.15           
-set_io  -nowarn -pullup no   rgb_red[2]       80 #   IOR_116     J1.17           
-set_io  -nowarn -pullup no   rgb_red[3]       82 #   IOR_118     J1.19           
-set_io  -nowarn -pullup no   rgb_blue[0]      74 #   IOR_110     J1.14           
-set_io  -nowarn -pullup no   rgb_blue[1]      76 #   IOR_112     J1.16           
-set_io  -nowarn -pullup no   rgb_blue[2]      79 #   IOR_115     J1.18           
-set_io  -nowarn -pullup no   rgb_blue[3]      81 #   IOR_117     J1.20   
-set_io  -nowarn -pullup no   rgb_green[0]     84 #   IOR_120     J1.21           
-set_io  -nowarn -pullup no   rgb_green[1]     87 #   IOR_136     J1.23           
-set_io  -nowarn -pullup no   rgb_green[2]     90 #   IOR_138     J1.25 
-set_io  -nowarn -pullup no   rgb_green[3]     93 #   IOR_140     J1.27  
-
-# SNES Controller
-
-set_io -pullup no   snes_clock       56 #   IOB_94      J1.5
-set_io -pullup no   snes_latch       61 #   IOB_96      J1.7
-set_io -pullup yes  snes_data0       60 #   IOB_95      J1.8
-set_io -pullup yes  snes_data1       63 #   IOB_103     J1.9
-
 # UART
 
-set_io -pullup no   uart0_tx         62 #   IOB_102     J1.10
-set_io -pullup yes  uart0_rx         64 #   IOB_104     J1.12
-set_io -pullup no   uart1_tx         88 #   IOR_137     J1.26           
-set_io -pullup yes  uart1_rx         91 #   IOR_138     J1.25 
+set_io -pullup no   uart1_tx         62 #   IOB_102     J1.10
+set_io -pullup yes  uart1_rx         64 #   IOB_104     J1.12
+set_io -pullup no   uart2_tx         88 #   IOR_137     J1.26           
+set_io -pullup yes  uart2_rx         91 #   IOR_138     J1.25 
 
 # SPI
 
 set_io  -pullup yes  spi_clk         70 #   IOB_107_SCK J6.10   R15.1   U4.2    
-set_io  -pullup yes  spi_cs          71 #   IOB_108_SS  D11.2   D12.2   R5.1    U4.4
+set_io  -pullup yes  spi_cs_n        71 #   IOB_108_SS  D11.2   D12.2   R5.1    U4.4
 set_io  -pullup yes  spi_mosi        67 #   IOB_105_SDO J6.7    U4.1        
 set_io  -pullup yes  spi_miso        68 #   IOB_106_SDI J6.6    U4.8        
 
