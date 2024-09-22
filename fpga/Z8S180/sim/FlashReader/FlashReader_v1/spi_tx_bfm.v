@@ -39,7 +39,7 @@ module spi_tx_bfm (
     input  wire         spi_tx_tValid,
 
     // The SPI Interface to test
-    input  wire         spi_cs,
+    input  wire         spi_cs_n,
     input  wire         spi_clk,
     output wire         spi_miso
   ); 
@@ -73,10 +73,10 @@ module spi_tx_bfm (
         // AT45DB161D - SPI Mode 3 timing.
         specparam t_setup_in    =  2.0;  // MISO to SPI_CLK valid setup time.
         specparam t_hold_in     =  3.0;  // SPI_CLK to MISO valid hold time.
-        specparam t_cs_setup    =  5.0;  // SPI_CS setup time until SPI_CLK falling edge.
-        specparam t_cs_hold     =  5.0;  // SPI_CS hold time after SPI_CLK rising edge.
-        specparam t_cs_minWidth = 20.0;  // Minimum SPI_CS pulse width.
-        // specparam t_cs_minWidth = 3000.0;  // Minimum SPI_CS pulse width. 
+        specparam t_cs_setup    =  5.0;  // spi_cs_n setup time until SPI_CLK falling edge.
+        specparam t_cs_hold     =  5.0;  // spi_cs_n hold time after SPI_CLK rising edge.
+        specparam t_cs_minWidth = 20.0;  // Minimum spi_cs_n pulse width.
+        // specparam t_cs_minWidth = 3000.0;  // Minimum spi_cs_n pulse width. 
         specparam t_hold_out    =  0.0;  // Output hold time after falling edge of clock.
         specparam t_valid       =  6.0;  // Negative edge of SPI_CLK to Output valid time.
         specparam t_dis         = 35.0;  // Delay from CS high until data tri-state
@@ -86,9 +86,9 @@ module spi_tx_bfm (
         $hold(posedge spi_clk, spi_miso, t_hold_in, error_flag);
 
         // CS timing checks.
-        $setup(negedge spi_cs, negedge spi_clk, t_cs_setup, error_flag);
-        $hold(posedge spi_clk, posedge spi_cs, t_cs_hold, error_flag);
-        $width(negedge spi_cs, t_cs_minWidth, 0, error_flag);
+        $setup(negedge spi_cs_n, negedge spi_clk, t_cs_setup, error_flag);
+        $hold(posedge spi_clk, posedge spi_cs_n, t_cs_hold, error_flag);
+        $width(negedge spi_cs_n, t_cs_minWidth, 0, error_flag);
     endspecify
 
     // Stop the simulation if there is a timing error.
@@ -100,7 +100,7 @@ module spi_tx_bfm (
 
 
     // When CS goes high the MISO slave output port will go high impedance.
-    always @(posedge spi_cs)
+    always @(posedge spi_cs_n)
     begin
         # t_dis;
         spi_miso_i = 1'bZ;

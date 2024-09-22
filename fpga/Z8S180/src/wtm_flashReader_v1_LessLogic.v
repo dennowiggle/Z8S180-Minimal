@@ -108,7 +108,6 @@ module wtm_flashReader #(
         SPI_PROCESSING  = 2;
     
     // Used to sync MISO to the clock domain and shift in MISO bits into a byte.
-    // wire        spi_miso_sync;
     reg  [7:0]  miso_shift_reg;
     // Holds the TX data to be sent out on the SPI transmit MOSI port.
     // The data valid signal has a duration of one clock cycle.
@@ -120,15 +119,6 @@ module wtm_flashReader #(
 
 
     assign spi_clk = spi_clk_i;
-
-    // Synchronize the incoming MISO serial data to the clock.
-    // wtm_sigSync spi_miso_sigSync(
-    //     .clock      (clock),
-    //     .rst_n      (reset_n),
-    //     .sig_in     (spi_miso),
-    //     .sig_out    (spi_miso_sync)
-    // );
-    // assign spi_miso_sync = spi_miso;
 
     // 35us timer used to wait after certain flash commands like reset and wake up.
     wtm_resetSyncDelay #(35, CLOCK_FREQ_HZ)

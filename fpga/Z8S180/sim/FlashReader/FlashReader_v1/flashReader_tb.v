@@ -50,7 +50,7 @@ module flashReader_tb ();
     wire        reset_n;
 
     // SPI Signals
-    wire        spi_cs;
+    wire        spi_cs_n;
     wire        spi_clk;
     wire        spi_mosi;
     wire        spi_miso;
@@ -108,7 +108,7 @@ module flashReader_tb ();
 
         // SPI signals
         .spi_clk            (spi_clk),
-        .spi_cs             (spi_cs),
+        .spi_cs_n           (spi_cs_n),
         .spi_mosi           (spi_mosi),
         .spi_miso           (spi_miso),
 
@@ -126,7 +126,7 @@ module flashReader_tb ();
     spi_tx_bfm bfm_spi_flash(
         .spi_tx_tData       (bfm_spi_tx_tData),
         .spi_tx_tValid      (bfm_spi_tx_tValid),
-        .spi_cs             (spi_cs),
+        .spi_cs_n           (spi_cs_n),
         .spi_clk            (spi_clk),
         .spi_miso           (spi_miso)
     );

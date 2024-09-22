@@ -101,7 +101,7 @@ module wtm_flashReader #(
 
     // Flash read state machine
     reg   [2:0] flash_read_state;
-    parameter [2:0]
+    localparam [2:0]
         FLASH_IDLE          = 0,
         FLASH_WAKE_UP       = 1,
         FLASH_WAIT          = 2,
@@ -409,6 +409,7 @@ module wtm_flashReader #(
             default :
             begin
                 flash_read_state        <= FLASH_IDLE;
+                command_count           <= 0;
             end
 
             endcase
